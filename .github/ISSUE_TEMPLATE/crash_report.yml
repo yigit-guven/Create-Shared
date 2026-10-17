@@ -1,0 +1,65 @@
+name: 💥 Crash Report
+description: Report a game crash or severe failure when loading/playing Create Shared
+title: "[Crash]: "
+labels: ["crash", "bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If your game crashed, please submit a crash report!
+        **Never paste full crash logs directly in the text box.** Please upload them to [mclo.gs](https://mclo.gs/) (it censors sensitive data like usernames and IPs automatically).
+
+  - type: input
+    id: mc-version
+    attributes:
+      label: Minecraft Version
+      value: "1.21.1"
+    validations:
+      required: true
+
+  - type: input
+    id: neoforge-version
+    attributes:
+      label: NeoForge Version
+      placeholder: "e.g. 21.1.262"
+    validations:
+      required: true
+
+  - type: input
+    id: mod-version
+    attributes:
+      label: Create Shared Version
+      placeholder: "e.g. 1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: create-version
+    attributes:
+      label: Create Mod Version
+      placeholder: "e.g. 6.0.10"
+    validations:
+      required: true
+
+  - type: input
+    id: crash-link
+    attributes:
+      label: Crash Log / Debug Log Link (mclo.gs or pastebin)
+      description: Upload `crash-reports/crash-....txt` or `logs/debug.log` to [mclo.gs](https://mclo.gs/) and paste the URL here.
+      placeholder: "https://mclo.gs/..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: crash-circumstances
+    attributes:
+      label: What were you doing when the game crashed?
+      description: Provide any context around the crash (starting the game, breaking a block, connecting a contraption, etc.).
+    validations:
+      required: true
+
+  - type: textarea
+    id: mod-list
+    attributes:
+      label: Installed Mods
+      description: List other mods you have installed or mention the modpack name and version.

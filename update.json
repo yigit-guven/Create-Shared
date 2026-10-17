@@ -1,0 +1,10 @@
+{
+  "homepage": "https://github.com/YigitGuven/Create-Shared",
+  "promoted": {
+    "1.21.1-latest": "1.0.0",
+    "1.21.1-recommended": "1.0.0"
+  },
+  "1.21.1": {
+    "1.0.0": "Initial release of Create: Shared for Minecraft 1.21.1 NeoForge."
+  }
+}

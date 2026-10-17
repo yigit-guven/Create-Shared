@@ -1,0 +1,65 @@
+name: Sync Docs to Wiki
+
+on:
+  push:
+    paths:
+      - 'docs/**'
+  workflow_dispatch:
+
+concurrency:
+  group: wiki-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync Docs to Wiki
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Main Repository
+        uses: actions/checkout@v4
+        with:
+          path: main-repo
+
+      - name: Checkout Wiki Repository
+        id: checkout-wiki
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}.wiki
+          path: wiki-repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync and Push
+        run: |
+          set -e
+
+          if [ ! -d "wiki-repo/.git" ]; then
+            echo "Wiki repo not checked out or uninitialized. Initializing..."
+            mkdir -p wiki-repo
+            cd wiki-repo
+            git init
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git"
+            git fetch origin master 2>/dev/null || git fetch origin main 2>/dev/null || true
+            git checkout -B master origin/master 2>/dev/null || git checkout -B master 2>/dev/null || true
+            cd ..
+          fi
+
+          rsync -av --delete --exclude '.git' main-repo/docs/ wiki-repo/
+
+          cd wiki-repo
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          git add .
+
+          if git diff-index --quiet HEAD 2>/dev/null; then
+            echo "No changes to sync."
+          else
+            git commit -m "Auto-sync docs to wiki [skip ci]"
+            git push -u origin master 2>/dev/null || git push -u origin HEAD
+          fi

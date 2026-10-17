@@ -1,0 +1,41 @@
+name: 💡 Feature Request
+description: Propose an idea or feature enhancement for Create Shared
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We welcome ideas to make Create Shared even better!
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: A clear and concise description of the feature or improvement you would like to see.
+      placeholder: "Describe the new mechanic, item, or feature..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-addressed
+    attributes:
+      label: Problem or Motivation
+      description: Is your feature request related to a problem? What gameplay challenge does it address?
+      placeholder: "I'm always frustrated when..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any alternative solutions or features you've considered.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any sketches, screenshots, or examples that help explain your idea.

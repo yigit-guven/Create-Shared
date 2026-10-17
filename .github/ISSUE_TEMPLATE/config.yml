@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Wiki & Documentation
+    url: https://github.com/YigitGuven/Create-Shared/wiki
+    about: Read our documentation, guides, and FAQs before submitting an issue.
+  - name: 💬 Community Discussions & Questions
+    url: https://github.com/YigitGuven/Create-Shared/discussions
+    about: Ask gameplay questions, share creations, and chat with the community.
