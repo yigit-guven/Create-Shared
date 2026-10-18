@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "create_shared:diamond_plate"
+  },
+  "result": {
+    "count": 2,
+    "id": "create_shared:diamond_plate_slab"
+  }
+}

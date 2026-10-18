@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "create_shared:hazard_block",
+    "create_shared:hazard_stairs",
+    "create_shared:hazard_slab",
+    "create_shared:hazard_wall",
+    "create_shared:emergency_hazard_block",
+    "create_shared:emergency_hazard_stairs",
+    "create_shared:emergency_hazard_slab",
+    "create_shared:emergency_hazard_wall",
+    "create_shared:diamond_plate",
+    "create_shared:diamond_plate_stairs",
+    "create_shared:diamond_plate_slab",
+    "create_shared:diamond_plate_wall",
+    "create_shared:riveted_sheet_metal",
+    "create_shared:riveted_sheet_metal_stairs",
+    "create_shared:riveted_sheet_metal_slab",
+    "create_shared:riveted_sheet_metal_wall",
+    "create_shared:factory_vent",
+    "create_shared:industrial_grate"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "create_shared:block/factory_vent"
+    },
+    "facing=south": {
+      "model": "create_shared:block/factory_vent",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=west": {
+      "model": "create_shared:block/factory_vent",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=east": {
+      "model": "create_shared:block/factory_vent",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=up": {
+      "model": "create_shared:block/factory_vent",
+      "x": 270,
+      "uvlock": true
+    },
+    "facing=down": {
+      "model": "create_shared:block/factory_vent",
+      "x": 90,
+      "uvlock": true
+    }
+  }
+}

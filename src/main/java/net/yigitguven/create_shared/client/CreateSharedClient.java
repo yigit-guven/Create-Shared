@@ -16,6 +16,11 @@ import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.yigitguven.create_shared.CreateShared;
 
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.yigitguven.create_shared.registry.ModBlocks;
+
 public class CreateSharedClient {
 
     // Note: Colors MUST be fully opaque ARGB (0xFF alpha)!
@@ -30,9 +35,16 @@ public class CreateSharedClient {
         ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(CreateShared.MODID, "item/wrench/item"));
 
     public static void init(IEventBus modEventBus) {
+        modEventBus.addListener(CreateSharedClient::onClientSetup);
         modEventBus.addListener(CreateSharedClient::onRegisterAdditionalModels);
         modEventBus.addListener(EventPriority.LOWEST, CreateSharedClient::onModifyBakingResult);
         modEventBus.addListener(CreateSharedClient::onRegisterItemColors);
+    }
+
+    private static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.INDUSTRIAL_GRATE.get(), RenderType.cutout());
+        });
     }
 
     private static void onRegisterAdditionalModels(ModelEvent.RegisterAdditional event) {

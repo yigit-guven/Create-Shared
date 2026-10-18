@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "INI",
+    "NIN"
+  ],
+  "result": {
+    "count": 4,
+    "id": "create_shared:riveted_sheet_metal"
+  }
+}

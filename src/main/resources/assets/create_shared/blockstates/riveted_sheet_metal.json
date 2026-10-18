@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "create_shared:block/riveted_sheet_metal"
+    }
+  }
+}

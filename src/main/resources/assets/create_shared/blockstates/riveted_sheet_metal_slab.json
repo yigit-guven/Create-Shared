@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "create_shared:block/riveted_sheet_metal_slab"
+    },
+    "type=top": {
+      "model": "create_shared:block/riveted_sheet_metal_slab_top"
+    },
+    "type=double": {
+      "model": "create_shared:block/riveted_sheet_metal"
+    }
+  }
+}

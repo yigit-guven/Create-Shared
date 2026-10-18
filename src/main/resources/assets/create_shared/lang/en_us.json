@@ -1,0 +1,21 @@
+{
+  "itemGroup.create_shared.factory_decorations": "Create: Shared - Factory Decorations",
+  "block.create_shared.hazard_block": "Hazard Block",
+  "block.create_shared.hazard_stairs": "Hazard Stairs",
+  "block.create_shared.hazard_slab": "Hazard Slab",
+  "block.create_shared.hazard_wall": "Hazard Wall",
+  "block.create_shared.emergency_hazard_block": "Emergency Hazard Block",
+  "block.create_shared.emergency_hazard_stairs": "Emergency Hazard Stairs",
+  "block.create_shared.emergency_hazard_slab": "Emergency Hazard Slab",
+  "block.create_shared.emergency_hazard_wall": "Emergency Hazard Wall",
+  "block.create_shared.diamond_plate": "Diamond Plate",
+  "block.create_shared.diamond_plate_stairs": "Diamond Plate Stairs",
+  "block.create_shared.diamond_plate_slab": "Diamond Plate Slab",
+  "block.create_shared.diamond_plate_wall": "Diamond Plate Wall",
+  "block.create_shared.riveted_sheet_metal": "Riveted Sheet Metal",
+  "block.create_shared.riveted_sheet_metal_stairs": "Riveted Sheet Metal Stairs",
+  "block.create_shared.riveted_sheet_metal_slab": "Riveted Sheet Metal Slab",
+  "block.create_shared.riveted_sheet_metal_wall": "Riveted Sheet Metal Wall",
+  "block.create_shared.factory_vent": "Factory Exhaust Vent",
+  "block.create_shared.industrial_grate": "Industrial Floor Grate"
+}

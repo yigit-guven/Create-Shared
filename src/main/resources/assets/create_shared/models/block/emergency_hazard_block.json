@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "create_shared:block/emergency_hazard_block_end",
+    "side": "create_shared:block/emergency_hazard_block"
+  }
+}

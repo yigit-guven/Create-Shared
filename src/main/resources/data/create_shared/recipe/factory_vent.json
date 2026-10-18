@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "M": {
+      "item": "create_shared:riveted_sheet_metal"
+    },
+    "B": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "pattern": [
+    "M",
+    "B",
+    "M"
+  ],
+  "result": {
+    "count": 2,
+    "id": "create_shared:factory_vent"
+  }
+}

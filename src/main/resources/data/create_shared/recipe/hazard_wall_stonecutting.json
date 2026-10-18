@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "create_shared:hazard_block"
+  },
+  "result": {
+    "count": 1,
+    "id": "create_shared:hazard_wall"
+  }
+}

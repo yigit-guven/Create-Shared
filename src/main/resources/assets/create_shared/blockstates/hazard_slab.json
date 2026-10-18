@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "create_shared:block/hazard_slab"
+    },
+    "type=top": {
+      "model": "create_shared:block/hazard_slab_top"
+    },
+    "type=double": {
+      "model": "create_shared:block/hazard_block"
+    }
+  }
+}
