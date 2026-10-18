@@ -26,11 +26,15 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import net.createmod.catnip.lang.FontHelper.Palette;
 
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.world.item.armortrim.ArmorTrim;
+
 public class CreateSharedClient {
 
     // Note: Colors MUST be fully opaque ARGB (0xFF alpha)!
     public static final int DEFAULT_WRENCH_HANDLE_COLOR = 0xFF704E31;
     public static final int DEFAULT_GOGGLES_STRAP_COLOR = 0xFF805436;
+    public static final int DEFAULT_BRASS_COLOR = 0xFFE5B85C;
 
     public static final ModelResourceLocation GOGGLES_ITEM_MODEL =
         ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(CreateShared.MODID, "item/goggles"));
@@ -133,8 +137,32 @@ public class CreateSharedClient {
         return FastColor.ARGB32.color(255, red, green, blue);
     }
 
+    public static int getTrimMaterialColor(net.minecraft.world.item.ItemStack stack) {
+        ArmorTrim trim = stack.get(DataComponents.TRIM);
+        if (trim == null) {
+            return DEFAULT_BRASS_COLOR;
+        }
+        String assetName = trim.material().value().assetName();
+        return switch (assetName) {
+            case "quartz" -> 0xFFEBE4DD;
+            case "iron" -> 0xFFD8D8D8;
+            case "netherite" -> 0xFF4C4143;
+            case "redstone" -> 0xFFE61C1C;
+            case "copper" -> 0xFFD06C4A;
+            case "gold" -> 0xFFF6BC2B;
+            case "emerald" -> 0xFF17DD62;
+            case "diamond" -> 0xFF4AEDD0;
+            case "lapis" -> 0xFF2B53C6;
+            case "amethyst" -> 0xFFA470E0;
+            default -> {
+                TextColor color = trim.material().value().description().getStyle().getColor();
+                yield color != null ? FastColor.ARGB32.opaque(color.getValue()) : DEFAULT_BRASS_COLOR;
+            }
+        };
+    }
+
     private static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
-        // Wrench handle tinting
+        // Wrench tinting (handle = tintIndex 0, metal head/gears = tintIndex 1)
         event.register((stack, tintIndex) -> {
             if (tintIndex == 0) {
                 if (isRainbowStack(stack)) {
@@ -146,10 +174,13 @@ public class CreateSharedClient {
                 }
                 return DEFAULT_WRENCH_HANDLE_COLOR;
             }
+            if (tintIndex == 1) {
+                return getTrimMaterialColor(stack);
+            }
             return -1;
         }, AllItems.WRENCH.get());
 
-        // Goggles strap tinting (layer0 on 2D item, element 8 on 3D head model)
+        // Goggles tinting (strap = tintIndex 0, frame = tintIndex 1, lens = layer2 untinted)
         event.register((stack, tintIndex) -> {
             if (tintIndex == 0) {
                 if (isRainbowStack(stack)) {
@@ -160,6 +191,9 @@ public class CreateSharedClient {
                     return FastColor.ARGB32.opaque(dyedColor.rgb());
                 }
                 return DEFAULT_GOGGLES_STRAP_COLOR;
+            }
+            if (tintIndex == 1) {
+                return getTrimMaterialColor(stack);
             }
             return -1;
         }, AllItems.GOGGLES.get());

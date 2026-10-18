@@ -23,5 +23,9 @@
   "item.create_shared.hard_hat.tooltip.condition1": "When Falling Blocks Hit",
   "item.create_shared.hard_hat.tooltip.behaviour1": "_Deflects 100%%_ of damage from falling _anvils_, _stalactites_, and _blocks_ with a metallic clang.",
   "item.create_shared.hard_hat.tooltip.condition2": "When Crushed by Machinery",
-  "item.create_shared.hard_hat.tooltip.behaviour2": "_Reduces 75%%_ of damage from _kinetic crushing_, _suffocation_, and _high-speed wall collisions_."
+  "item.create_shared.hard_hat.tooltip.behaviour2": "_Reduces 75%%_ of damage from _kinetic crushing_, _suffocation_, and _high-speed wall collisions_.",
+  "item.create_shared.create_armor_trim_smithing_template": "Smithing Template",
+  "item.create_shared.smithing_template.create_armor_trim.applies_to": "Armor, Goggles, Wrench",
+  "item.create_shared.smithing_template.create_armor_trim.ingredients": "Ingots & Crystals",
+  "trim_pattern.create_shared.create": "Create Armor Trim"
 }

@@ -1,8 +1,13 @@
 package net.yigitguven.create_shared.registry;
 
+import java.util.List;
 import java.util.function.Supplier;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.SmithingTemplateItem;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -48,4 +53,31 @@ public class ModItems {
     // Equipment
     public static final DeferredItem<net.yigitguven.create_shared.item.HardHatItem> HARD_HAT =
         ITEMS.registerItem("hard_hat", props -> new net.yigitguven.create_shared.item.HardHatItem(ModArmorMaterials.HARD_HAT, props.durability(385)));
+
+    // Armor Trim Smithing Template
+    public static final DeferredItem<SmithingTemplateItem> CREATE_ARMOR_TRIM_SMITHING_TEMPLATE =
+        ITEMS.register("create_armor_trim_smithing_template",
+            () -> new SmithingTemplateItem(
+                Component.translatable("item.create_shared.smithing_template.create_armor_trim.applies_to").withStyle(ChatFormatting.BLUE),
+                Component.translatable("item.create_shared.smithing_template.create_armor_trim.ingredients").withStyle(ChatFormatting.BLUE),
+                Component.translatable("trim_pattern.create_shared.create").withStyle(ChatFormatting.GRAY),
+                Component.translatable("item.minecraft.smithing_template.armor_trim.base_slot_description"),
+                Component.translatable("item.minecraft.smithing_template.armor_trim.additions_slot_description"),
+                List.of(
+                    ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet"),
+                    ResourceLocation.withDefaultNamespace("item/empty_armor_slot_chestplate"),
+                    ResourceLocation.withDefaultNamespace("item/empty_armor_slot_leggings"),
+                    ResourceLocation.withDefaultNamespace("item/empty_armor_slot_boots")
+                ),
+                List.of(
+                    ResourceLocation.withDefaultNamespace("item/empty_slot_ingot"),
+                    ResourceLocation.withDefaultNamespace("item/empty_slot_redstone_dust"),
+                    ResourceLocation.withDefaultNamespace("item/empty_slot_lapis_lazuli"),
+                    ResourceLocation.withDefaultNamespace("item/empty_slot_quartz"),
+                    ResourceLocation.withDefaultNamespace("item/empty_slot_diamond"),
+                    ResourceLocation.withDefaultNamespace("item/empty_slot_emerald"),
+                    ResourceLocation.withDefaultNamespace("item/empty_slot_amethyst_shard")
+                )
+            )
+        );
 }

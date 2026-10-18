@@ -1,0 +1,8 @@
+{
+  "asset_id": "create_shared:create",
+  "template_item": "create_shared:create_armor_trim_smithing_template",
+  "description": {
+    "translate": "trim_pattern.create_shared.create"
+  },
+  "decal": false
+}

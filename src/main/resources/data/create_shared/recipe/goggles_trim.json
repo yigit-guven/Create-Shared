@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing_trim",
+  "template": {
+    "item": "create_shared:create_armor_trim_smithing_template"
+  },
+  "base": {
+    "item": "create:goggles"
+  },
+  "addition": {
+    "tag": "minecraft:trim_materials"
+  }
+}

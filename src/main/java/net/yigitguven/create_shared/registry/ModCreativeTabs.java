@@ -67,10 +67,16 @@ public class ModCreativeTabs {
 
                 // Safety Gear
                 output.accept(ModItems.HARD_HAT.get());
+
+                // Smithing Template
+                output.accept(ModItems.CREATE_ARMOR_TRIM_SMITHING_TEMPLATE.get());
             })
             .build());
 
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.CREATE_ARMOR_TRIM_SMITHING_TEMPLATE);
+        }
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
             event.accept(ModItems.HARD_HAT);
         }
