@@ -19,6 +19,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Right-clicking water cauldrons washes off applied dye and restores the default look.
   - Custom tint-aware models and client item color handlers tint only the wrench handle grip and goggles leather headband/strap, preserving brass and mechanical textures.
   - Full support for inventory GUI, first/third-person rendering, armor head slot, and Curios accessory rendering.
+- Added 18 factory-themed decorative blocks, complete with stairs, slabs, and walls:
+  - **Hazard Blocks** (Yellow & Black caution stripes): Hazard Block (3-axis rotatable pillar), Hazard Stairs, Hazard Slab, Hazard Wall.
+  - **Emergency Hazard Blocks** (Red & White danger stripes): Emergency Hazard Block (3-axis rotatable pillar), Emergency Hazard Stairs, Emergency Hazard Slab, Emergency Hazard Wall.
+  - **Diamond Plate**: Industrial embossed steel tread plate, Diamond Plate Stairs, Diamond Plate Slab, Diamond Plate Wall.
+  - **Riveted Sheet Metal**: Industrial boiler plating with seams and hex rivets, Riveted Sheet Metal Stairs, Riveted Sheet Metal Slab, Riveted Sheet Metal Wall.
+  - **Factory Exhaust Vent**: Directional 6-way ventilation unit with metal louvers, heavy casing, and status LED indicator.
+  - **Industrial Floor Grate**: Catwalk floor mesh featuring transparent cutout slots and waterloggable support (`SimpleWaterloggedBlock`).
+- Integrated Create Mod wrench mechanics (`IWrenchable` & `#create:wrench_pickup`):
+  - **Shift + Right-Click** with wrench instantly dismantles blocks back into player inventory with wrench remove sounds and particles.
+  - **Right-Click** with wrench rotates block states (rotates pillar axes, stair facings, vent directions, and toggles slab halves) with wrench rotate sounds.
+- Added full crafting and Stonecutter recipes, custom 16x16 pixel-art textures, loot tables, and pickaxe mineable tags for all factory blocks.
+- Added dedicated **Create: Shared** creative mode tab:
+  - Features an animated rainbow-tinted Create Goggles icon dynamically cycling through the color spectrum in real-time.
+  - Organizes all factory decorative blocks in a single dedicated tab.
 - Added comprehensive documentation and automated GitHub Wiki sync.
 - Added cross-branch documentation synchronization workflow.
 - Added GitHub issue templates for bug reports, crash reports, and feature requests.

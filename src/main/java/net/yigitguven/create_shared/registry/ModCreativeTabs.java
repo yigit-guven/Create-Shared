@@ -1,10 +1,15 @@
 package net.yigitguven.create_shared.registry;
 
+import com.simibubi.create.AllItems;
+
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -14,10 +19,23 @@ public class ModCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
         DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CreateShared.MODID);
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FACTORY_DECORATIONS_TAB =
-        CREATIVE_MODE_TABS.register("factory_decorations", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.create_shared.factory_decorations"))
-            .icon(() -> new ItemStack(ModBlocks.HAZARD_BLOCK.get()))
+    public static ItemStack RAINBOW_GOGGLES_ICON;
+
+    public static ItemStack getTabIcon() {
+        if (RAINBOW_GOGGLES_ICON == null) {
+            ItemStack stack = new ItemStack(AllItems.GOGGLES.get());
+            CompoundTag tag = new CompoundTag();
+            tag.putBoolean("CreativeTabIconRainbow", true);
+            stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+            RAINBOW_GOGGLES_ICON = stack;
+        }
+        return RAINBOW_GOGGLES_ICON;
+    }
+
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB =
+        CREATIVE_MODE_TABS.register("create_shared", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.create_shared"))
+            .icon(ModCreativeTabs::getTabIcon)
             .displayItems((parameters, output) -> {
                 // Hazard (Yellow / Black)
                 output.accept(ModItems.HAZARD_BLOCK.get());

@@ -80,10 +80,50 @@ public class CreateSharedClient {
         }
     }
 
+    public static boolean isRainbowStack(net.minecraft.world.item.ItemStack stack) {
+        if (stack == null || stack.isEmpty()) return false;
+        if (net.yigitguven.create_shared.registry.ModCreativeTabs.RAINBOW_GOGGLES_ICON != null
+                && stack == net.yigitguven.create_shared.registry.ModCreativeTabs.RAINBOW_GOGGLES_ICON) {
+            return true;
+        }
+        net.minecraft.world.item.component.CustomData customData = stack.get(DataComponents.CUSTOM_DATA);
+        return customData != null && (customData.contains("CreativeTabIconRainbow") || customData.contains("Rainbow"));
+    }
+
+    public static int getRainbowColor() {
+        long time = System.currentTimeMillis();
+        float hue = (time % 4000L) / 4000.0f;
+        return hsvToRgb(hue, 0.85f, 1.0f);
+    }
+
+    private static int hsvToRgb(float h, float s, float v) {
+        int hInt = (int) (h * 6.0f);
+        float f = h * 6.0f - hInt;
+        float p = v * (1.0f - s);
+        float q = v * (1.0f - f * s);
+        float t = v * (1.0f - (1.0f - f) * s);
+        float r = 0, g = 0, b = 0;
+        switch (hInt % 6) {
+            case 0 -> { r = v; g = t; b = p; }
+            case 1 -> { r = q; g = v; b = p; }
+            case 2 -> { r = p; g = v; b = t; }
+            case 3 -> { r = p; g = q; b = v; }
+            case 4 -> { r = t; g = p; b = v; }
+            case 5 -> { r = v; g = p; b = q; }
+        }
+        int red = Math.min(255, Math.max(0, (int) (r * 255.0f)));
+        int green = Math.min(255, Math.max(0, (int) (g * 255.0f)));
+        int blue = Math.min(255, Math.max(0, (int) (b * 255.0f)));
+        return FastColor.ARGB32.color(255, red, green, blue);
+    }
+
     private static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
         // Wrench handle tinting
         event.register((stack, tintIndex) -> {
             if (tintIndex == 0) {
+                if (isRainbowStack(stack)) {
+                    return getRainbowColor();
+                }
                 DyedItemColor dyedColor = stack.get(DataComponents.DYED_COLOR);
                 if (dyedColor != null) {
                     return FastColor.ARGB32.opaque(dyedColor.rgb());
@@ -96,6 +136,9 @@ public class CreateSharedClient {
         // Goggles strap tinting (layer0 on 2D item, element 8 on 3D head model)
         event.register((stack, tintIndex) -> {
             if (tintIndex == 0) {
+                if (isRainbowStack(stack)) {
+                    return getRainbowColor();
+                }
                 DyedItemColor dyedColor = stack.get(DataComponents.DYED_COLOR);
                 if (dyedColor != null) {
                     return FastColor.ARGB32.opaque(dyedColor.rgb());
