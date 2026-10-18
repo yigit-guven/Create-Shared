@@ -32,3 +32,6 @@ run/
 **/src/generated/**/.cache/
 repo/
 !**/src/**/repo/
+
+# Temporary / extension state
+state/

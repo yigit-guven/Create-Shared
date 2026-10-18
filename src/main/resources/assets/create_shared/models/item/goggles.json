@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "create_shared:item/goggles_strap",
+    "layer1": "create_shared:item/goggles_overlay"
+  }
+}
