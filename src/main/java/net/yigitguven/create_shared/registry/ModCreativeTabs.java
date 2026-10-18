@@ -64,10 +64,16 @@ public class ModCreativeTabs {
                 // Vent & Grate
                 output.accept(ModItems.FACTORY_VENT.get());
                 output.accept(ModItems.INDUSTRIAL_GRATE.get());
+
+                // Safety Gear
+                output.accept(ModItems.HARD_HAT.get());
             })
             .build());
 
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+            event.accept(ModItems.HARD_HAT);
+        }
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModItems.HAZARD_BLOCK);
             event.accept(ModItems.HAZARD_STAIRS);

@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Right-clicking water cauldrons washes off applied dye and restores the default look.
   - Custom tint-aware models and client item color handlers tint only the wrench handle grip and goggles leather headband/strap, preserving brass and mechanical textures.
   - Full support for inventory GUI, first/third-person rendering, armor head slot, and Curios accessory rendering.
+- Added the **Safety Hard Hat** (`create_shared:hard_hat`):
+  - Custom 3D blocky armor model featuring a domed crown, flared brim with extended front visor, 3 raised reinforcement ridges, and side accessory brackets accurately modeled after classic industrial safety hard hats.
+  - **Impact Deflection**: 100% immune to falling anvils, falling stalactites, and falling blocks, deflecting them with a loud metallic clang sound while taking durability damage.
+  - **Crush Cushioning**: Grants 75% damage reduction against kinetic crushing (`create:crush`, `create:run_over`), suffocation in blocks (`in_wall`), flying into walls (`fly_into_wall`), and cramming.
+  - **Dyeable**: Default Safety Yellow (`0xFFF4C430`), fully dyeable via crafting with any vanilla dye, washable in cauldrons, and compatible with dynamic rainbow animations.
+  - Balanced armor stats: 3 Defense, 2 Toughness, +0.1 Knockback Resistance, and 385 Durability.
 - Added 18 factory-themed decorative blocks, complete with stairs, slabs, and walls:
   - **Hazard Blocks** (Yellow & Black caution stripes): Hazard Block (3-axis rotatable pillar), Hazard Stairs, Hazard Slab, Hazard Wall.
   - **Emergency Hazard Blocks** (Red & White danger stripes): Emergency Hazard Block (3-axis rotatable pillar), Emergency Hazard Stairs, Emergency Hazard Slab, Emergency Hazard Wall.

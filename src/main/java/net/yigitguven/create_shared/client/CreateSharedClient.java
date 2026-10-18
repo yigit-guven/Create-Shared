@@ -20,6 +20,11 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.yigitguven.create_shared.registry.ModBlocks;
+import net.yigitguven.create_shared.registry.ModItems;
+
+import com.simibubi.create.foundation.item.ItemDescription;
+import com.simibubi.create.foundation.item.TooltipModifier;
+import net.createmod.catnip.lang.FontHelper.Palette;
 
 public class CreateSharedClient {
 
@@ -34,16 +39,27 @@ public class CreateSharedClient {
     public static final ModelResourceLocation WRENCH_ITEM_MODEL =
         ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(CreateShared.MODID, "item/wrench/item"));
 
+    public static final net.minecraft.client.model.geom.ModelLayerLocation HARD_HAT_LAYER =
+        new net.minecraft.client.model.geom.ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(CreateShared.MODID, "hard_hat"), "main");
+
     public static void init(IEventBus modEventBus) {
         modEventBus.addListener(CreateSharedClient::onClientSetup);
+        modEventBus.addListener(CreateSharedClient::onRegisterLayerDefinitions);
         modEventBus.addListener(CreateSharedClient::onRegisterAdditionalModels);
         modEventBus.addListener(EventPriority.LOWEST, CreateSharedClient::onModifyBakingResult);
         modEventBus.addListener(CreateSharedClient::onRegisterItemColors);
     }
 
+    private static void onRegisterLayerDefinitions(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(HARD_HAT_LAYER, net.yigitguven.create_shared.client.model.HardHatArmorModel::createBodyLayer);
+        net.yigitguven.create_shared.client.model.HardHatArmorModel.resetInstance();
+    }
+
     private static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.INDUSTRIAL_GRATE.get(), RenderType.cutout());
+            TooltipModifier.REGISTRY.register(ModItems.HARD_HAT.get(),
+                new ItemDescription.Modifier(ModItems.HARD_HAT.get(), Palette.STANDARD_CREATE));
         });
     }
 
@@ -147,5 +163,20 @@ public class CreateSharedClient {
             }
             return -1;
         }, AllItems.GOGGLES.get());
+
+        // Hard Hat tinting (layer0 on 2D item)
+        event.register((stack, tintIndex) -> {
+            if (tintIndex == 0) {
+                if (isRainbowStack(stack)) {
+                    return getRainbowColor();
+                }
+                DyedItemColor dyedColor = stack.get(DataComponents.DYED_COLOR);
+                if (dyedColor != null) {
+                    return FastColor.ARGB32.opaque(dyedColor.rgb());
+                }
+                return net.yigitguven.create_shared.item.HardHatItem.DEFAULT_HARD_HAT_COLOR;
+            }
+            return -1;
+        }, net.yigitguven.create_shared.registry.ModItems.HARD_HAT.get());
     }
 }

@@ -44,4 +44,8 @@ public class ModItems {
 
     // Industrial Grate
     public static final DeferredItem<BlockItem> INDUSTRIAL_GRATE = registerBlockItem("industrial_grate", ModBlocks.INDUSTRIAL_GRATE);
+
+    // Equipment
+    public static final DeferredItem<net.yigitguven.create_shared.item.HardHatItem> HARD_HAT =
+        ITEMS.registerItem("hard_hat", props -> new net.yigitguven.create_shared.item.HardHatItem(ModArmorMaterials.HARD_HAT, props.durability(385)));
 }

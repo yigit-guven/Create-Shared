@@ -17,6 +17,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.yigitguven.create_shared.client.CreateSharedClient;
+import net.yigitguven.create_shared.registry.ModArmorMaterials;
 import net.yigitguven.create_shared.registry.ModBlocks;
 import net.yigitguven.create_shared.registry.ModCreativeTabs;
 import net.yigitguven.create_shared.registry.ModItems;
@@ -27,6 +28,7 @@ public class CreateShared {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public CreateShared(IEventBus modEventBus, ModContainer modContainer) {
+        ModArmorMaterials.ARMOR_MATERIALS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
@@ -55,6 +57,7 @@ public class CreateShared {
 
             CauldronInteraction.WATER.map().put(AllItems.WRENCH.get(), cleanDyed);
             CauldronInteraction.WATER.map().put(AllItems.GOGGLES.get(), cleanDyed);
+            CauldronInteraction.WATER.map().put(ModItems.HARD_HAT.get(), cleanDyed);
         });
     }
 }

@@ -17,5 +17,11 @@
   "block.create_shared.riveted_sheet_metal_slab": "Riveted Sheet Metal Slab",
   "block.create_shared.riveted_sheet_metal_wall": "Riveted Sheet Metal Wall",
   "block.create_shared.factory_vent": "Factory Exhaust Vent",
-  "block.create_shared.industrial_grate": "Industrial Floor Grate"
+  "block.create_shared.industrial_grate": "Industrial Floor Grate",
+  "item.create_shared.hard_hat": "Safety Hard Hat",
+  "item.create_shared.hard_hat.tooltip.summary": "Heavy-duty protective headgear designed for _factory safety_ and _hazard prevention_.",
+  "item.create_shared.hard_hat.tooltip.condition1": "When Falling Blocks Hit",
+  "item.create_shared.hard_hat.tooltip.behaviour1": "_Deflects 100%%_ of damage from falling _anvils_, _stalactites_, and _blocks_ with a metallic clang.",
+  "item.create_shared.hard_hat.tooltip.condition2": "When Crushed by Machinery",
+  "item.create_shared.hard_hat.tooltip.behaviour2": "_Reduces 75%%_ of damage from _kinetic crushing_, _suffocation_, and _high-speed wall collisions_."
 }

@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "create:wrench",
-    "create:goggles"
+    "create:goggles",
+    "create_shared:hard_hat"
   ]
 }
