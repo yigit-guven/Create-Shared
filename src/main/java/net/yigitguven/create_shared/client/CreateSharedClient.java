@@ -64,6 +64,8 @@ public class CreateSharedClient {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.INDUSTRIAL_GRATE.get(), RenderType.cutout());
             TooltipModifier.REGISTRY.register(ModItems.HARD_HAT.get(),
                 new ItemDescription.Modifier(ModItems.HARD_HAT.get(), Palette.STANDARD_CREATE));
+
+            net.createmod.ponder.foundation.PonderIndex.addPlugin(new net.yigitguven.create_shared.client.ponder.CreateSharedPonderPlugin());
         });
     }
 

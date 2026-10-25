@@ -34,6 +34,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Factory Vent Duct** (`create_shared:factory_vent_duct`): 6-way omnidirectional hollow crawl duct block (`NORTH`, `SOUTH`, `EAST`, `WEST`, `UP`, `DOWN`) that automatically opens connecting sides towards neighboring ducts, vents, and Create fans while keeping unconnected sides sealed with riveted sheet metal panels. Supports vertical shaft climbing (`isLadder`) using Space/Shift.
   - **Seamless Vanilla Crawl Integration**: Approaching open wall vents automatically initiates vanilla crawl mode (`Pose.SWIMMING`), allowing players to smoothly enter 0.75m vent tunnels. Crawling persists throughout vent/duct webs and automatically releases when exiting into open spaces.
   - **Create Encased Fan Integration**: Exhaust vents and vent ducts connect directly to the fanning side of Create Encased Fans, allowing raycast air currents to blast through open vents and ducts into connected rooms.
+  - **In-Game Ponder Tutorials**: Added animated Ponder tutorial scenes when holding the Ponder key (`W`) over the Factory Exhaust Vent or Factory Vent Duct:
+    - *Operating Factory Exhaust Vents*: Demonstrates manual right-click gate toggling, redstone automation with levers/wire, and automatic player crawl mode transition upon approaching an open wall vent.
+    - *Vent Ducts & Fan Wind Currents*: Demonstrates multi-way duct webbing, vertical duct shaft climbing like a ladder, dynamic vent collar connections, and Encased Fan air currents blowing through ducts and vents into rooms.
   - **Industrial Floor Grate**: Catwalk floor mesh featuring transparent cutout slots and waterloggable support (`SimpleWaterloggedBlock`).
 - Integrated Create Mod wrench mechanics (`IWrenchable` & `#create:wrench_pickup`):
   - **Shift + Right-Click** with wrench instantly dismantles blocks back into player inventory with wrench remove sounds and particles.
