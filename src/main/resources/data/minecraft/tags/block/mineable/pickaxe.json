@@ -18,6 +18,7 @@
     "create_shared:riveted_sheet_metal_slab",
     "create_shared:riveted_sheet_metal_wall",
     "create_shared:factory_vent",
+    "create_shared:factory_vent_duct",
     "create_shared:industrial_grate"
   ]
 }

@@ -1,30 +1,114 @@
 {
   "variants": {
-    "facing=north": {
-      "model": "create_shared:block/factory_vent"
+    "connected=false,facing=north,open=false": {
+      "model": "create_shared:block/factory_vent_closed_disconnected"
     },
-    "facing=south": {
-      "model": "create_shared:block/factory_vent",
+    "connected=false,facing=north,open=true": {
+      "model": "create_shared:block/factory_vent_open_disconnected"
+    },
+    "connected=true,facing=north,open=false": {
+      "model": "create_shared:block/factory_vent_closed_connected"
+    },
+    "connected=true,facing=north,open=true": {
+      "model": "create_shared:block/factory_vent_open_connected"
+    },
+    "connected=false,facing=south,open=false": {
+      "model": "create_shared:block/factory_vent_closed_disconnected",
       "y": 180,
       "uvlock": true
     },
-    "facing=west": {
-      "model": "create_shared:block/factory_vent",
+    "connected=false,facing=south,open=true": {
+      "model": "create_shared:block/factory_vent_open_disconnected",
+      "y": 180,
+      "uvlock": true
+    },
+    "connected=true,facing=south,open=false": {
+      "model": "create_shared:block/factory_vent_closed_connected",
+      "y": 180,
+      "uvlock": true
+    },
+    "connected=true,facing=south,open=true": {
+      "model": "create_shared:block/factory_vent_open_connected",
+      "y": 180,
+      "uvlock": true
+    },
+    "connected=false,facing=west,open=false": {
+      "model": "create_shared:block/factory_vent_closed_disconnected",
       "y": 270,
       "uvlock": true
     },
-    "facing=east": {
-      "model": "create_shared:block/factory_vent",
+    "connected=false,facing=west,open=true": {
+      "model": "create_shared:block/factory_vent_open_disconnected",
+      "y": 270,
+      "uvlock": true
+    },
+    "connected=true,facing=west,open=false": {
+      "model": "create_shared:block/factory_vent_closed_connected",
+      "y": 270,
+      "uvlock": true
+    },
+    "connected=true,facing=west,open=true": {
+      "model": "create_shared:block/factory_vent_open_connected",
+      "y": 270,
+      "uvlock": true
+    },
+    "connected=false,facing=east,open=false": {
+      "model": "create_shared:block/factory_vent_closed_disconnected",
       "y": 90,
       "uvlock": true
     },
-    "facing=up": {
-      "model": "create_shared:block/factory_vent",
+    "connected=false,facing=east,open=true": {
+      "model": "create_shared:block/factory_vent_open_disconnected",
+      "y": 90,
+      "uvlock": true
+    },
+    "connected=true,facing=east,open=false": {
+      "model": "create_shared:block/factory_vent_closed_connected",
+      "y": 90,
+      "uvlock": true
+    },
+    "connected=true,facing=east,open=true": {
+      "model": "create_shared:block/factory_vent_open_connected",
+      "y": 90,
+      "uvlock": true
+    },
+    "connected=false,facing=up,open=false": {
+      "model": "create_shared:block/factory_vent_closed_disconnected",
       "x": 270,
       "uvlock": true
     },
-    "facing=down": {
-      "model": "create_shared:block/factory_vent",
+    "connected=false,facing=up,open=true": {
+      "model": "create_shared:block/factory_vent_open_disconnected",
+      "x": 270,
+      "uvlock": true
+    },
+    "connected=true,facing=up,open=false": {
+      "model": "create_shared:block/factory_vent_closed_connected",
+      "x": 270,
+      "uvlock": true
+    },
+    "connected=true,facing=up,open=true": {
+      "model": "create_shared:block/factory_vent_open_connected",
+      "x": 270,
+      "uvlock": true
+    },
+    "connected=false,facing=down,open=false": {
+      "model": "create_shared:block/factory_vent_closed_disconnected",
+      "x": 90,
+      "uvlock": true
+    },
+    "connected=false,facing=down,open=true": {
+      "model": "create_shared:block/factory_vent_open_disconnected",
+      "x": 90,
+      "uvlock": true
+    },
+    "connected=true,facing=down,open=false": {
+      "model": "create_shared:block/factory_vent_closed_connected",
+      "x": 90,
+      "uvlock": true
+    },
+    "connected=true,facing=down,open=true": {
+      "model": "create_shared:block/factory_vent_open_connected",
       "x": 90,
       "uvlock": true
     }

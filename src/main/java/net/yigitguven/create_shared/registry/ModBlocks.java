@@ -10,6 +10,7 @@ import net.yigitguven.create_shared.block.FactoryBlock;
 import net.yigitguven.create_shared.block.FactorySlabBlock;
 import net.yigitguven.create_shared.block.FactoryStairsBlock;
 import net.yigitguven.create_shared.block.FactoryVentBlock;
+import net.yigitguven.create_shared.block.FactoryVentDuctBlock;
 import net.yigitguven.create_shared.block.FactoryWallBlock;
 import net.yigitguven.create_shared.block.HazardPillarBlock;
 import net.yigitguven.create_shared.block.IndustrialGrateBlock;
@@ -83,7 +84,11 @@ public class ModBlocks {
 
     // --- Factory Vent ---
     public static final DeferredBlock<FactoryVentBlock> FACTORY_VENT = BLOCKS.registerBlock("factory_vent",
-        FactoryVentBlock::new, industrialMetalProperties(MapColor.METAL));
+        FactoryVentBlock::new, industrialMetalProperties(MapColor.METAL).noOcclusion());
+
+    // --- Factory Vent Duct ---
+    public static final DeferredBlock<FactoryVentDuctBlock> FACTORY_VENT_DUCT = BLOCKS.registerBlock("factory_vent_duct",
+        FactoryVentDuctBlock::new, industrialMetalProperties(MapColor.METAL).noOcclusion());
 
     // --- Industrial Grate ---
     public static final DeferredBlock<IndustrialGrateBlock> INDUSTRIAL_GRATE = BLOCKS.registerBlock("industrial_grate",

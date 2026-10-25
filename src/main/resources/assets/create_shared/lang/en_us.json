@@ -17,6 +17,7 @@
   "block.create_shared.riveted_sheet_metal_slab": "Riveted Sheet Metal Slab",
   "block.create_shared.riveted_sheet_metal_wall": "Riveted Sheet Metal Wall",
   "block.create_shared.factory_vent": "Factory Exhaust Vent",
+  "block.create_shared.factory_vent_duct": "Factory Vent Duct",
   "block.create_shared.industrial_grate": "Industrial Floor Grate",
   "item.create_shared.hard_hat": "Safety Hard Hat",
   "item.create_shared.hard_hat.tooltip.summary": "Heavy-duty protective headgear designed for _factory safety_ and _hazard prevention_.",

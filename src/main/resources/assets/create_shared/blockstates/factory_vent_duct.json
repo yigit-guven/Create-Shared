@@ -1,0 +1,62 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_frame"
+      }
+    },
+    {
+      "when": {
+        "north": "false"
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_wall"
+      }
+    },
+    {
+      "when": {
+        "south": "false"
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_wall",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": "false"
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_wall",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "east": "false"
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_wall",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "down": "false"
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_wall",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "up": "false"
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_wall",
+        "x": 270
+      }
+    }
+  ]
+}

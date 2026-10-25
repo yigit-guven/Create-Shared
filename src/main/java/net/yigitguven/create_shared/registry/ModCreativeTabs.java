@@ -63,6 +63,7 @@ public class ModCreativeTabs {
 
                 // Vent & Grate
                 output.accept(ModItems.FACTORY_VENT.get());
+                output.accept(ModItems.FACTORY_VENT_DUCT.get());
                 output.accept(ModItems.INDUSTRIAL_GRATE.get());
 
                 // Safety Gear
@@ -102,6 +103,7 @@ public class ModCreativeTabs {
             event.accept(ModItems.RIVETED_SHEET_METAL_WALL);
 
             event.accept(ModItems.FACTORY_VENT);
+            event.accept(ModItems.FACTORY_VENT_DUCT);
             event.accept(ModItems.INDUSTRIAL_GRATE);
         }
     }

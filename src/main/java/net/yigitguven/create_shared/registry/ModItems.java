@@ -44,8 +44,9 @@ public class ModItems {
     public static final DeferredItem<BlockItem> RIVETED_SHEET_METAL_SLAB = registerBlockItem("riveted_sheet_metal_slab", ModBlocks.RIVETED_SHEET_METAL_SLAB);
     public static final DeferredItem<BlockItem> RIVETED_SHEET_METAL_WALL = registerBlockItem("riveted_sheet_metal_wall", ModBlocks.RIVETED_SHEET_METAL_WALL);
 
-    // Factory Vent
+    // Factory Vent & Duct
     public static final DeferredItem<BlockItem> FACTORY_VENT = registerBlockItem("factory_vent", ModBlocks.FACTORY_VENT);
+    public static final DeferredItem<BlockItem> FACTORY_VENT_DUCT = registerBlockItem("factory_vent_duct", ModBlocks.FACTORY_VENT_DUCT);
 
     // Industrial Grate
     public static final DeferredItem<BlockItem> INDUSTRIAL_GRATE = registerBlockItem("industrial_grate", ModBlocks.INDUSTRIAL_GRATE);

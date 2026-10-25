@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "M": {
+      "item": "create_shared:riveted_sheet_metal"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "M M",
+    "MMM"
+  ],
+  "result": {
+    "count": 4,
+    "id": "create_shared:factory_vent_duct"
+  }
+}

@@ -39,6 +39,8 @@ public class CreateShared {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             CreateSharedClient.init(modEventBus);
         }
+
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(net.yigitguven.create_shared.event.VentCrawlHandler::onPlayerTick);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
