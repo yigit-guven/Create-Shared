@@ -29,16 +29,16 @@
   "item.create_shared.smithing_template.create_armor_trim.applies_to": "Armor, Goggles, Wrench",
   "item.create_shared.smithing_template.create_armor_trim.ingredients": "Ingots & Crystals",
   "trim_pattern.create_shared.create": "Create Armor Trim",
-
   "create_shared.ponder.factory_vent_gate.header": "Operating Factory Exhaust Vents",
   "create_shared.ponder.factory_vent_gate.text_1": "Factory Exhaust Vents feature a sturdy mechanical gate",
   "create_shared.ponder.factory_vent_gate.text_2": "Players can manually click the front to toggle the gate open or closed",
   "create_shared.ponder.factory_vent_gate.text_3": "Redstone power can also automate opening and closing the gate",
   "create_shared.ponder.factory_vent_gate.text_4": "Walking towards an open wall vent smoothly drops players into crawl pose to enter inside!",
-
   "create_shared.ponder.factory_vent_duct_network.header": "Vent Ducts & Fan Wind Currents",
   "create_shared.ponder.factory_vent_duct_network.text_1": "Factory Vent Ducts seamlessly connect on all 6 sides to build crawl tunnels",
   "create_shared.ponder.factory_vent_duct_network.text_2": "Vertical ducts act like ladders, allowing players to climb straight up and down",
   "create_shared.ponder.factory_vent_duct_network.text_3": "Ducts and Vents connect dynamically, opening back-flaps whenever joined together",
-  "create_shared.ponder.factory_vent_duct_network.text_4": "Encased Fans blowing into vents or ducts push air currents through the network and into rooms!"
+  "create_shared.ponder.factory_vent_duct_network.text_4": "Encased Fans blowing into vents or ducts push air currents through the network and into rooms!",
+  "create_shared.ponder.tag.ventilation": "Ventilation",
+  "create_shared.ponder.tag.ventilation.description": "Hollow exhaust vents and multi-directional ductwork for crawl tunnels and air circulation"
 }

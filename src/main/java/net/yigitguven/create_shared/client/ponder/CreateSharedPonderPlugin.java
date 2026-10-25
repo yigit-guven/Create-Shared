@@ -16,22 +16,34 @@ public class CreateSharedPonderPlugin implements PonderPlugin {
         return CreateShared.MODID;
     }
 
+    public static final ResourceLocation VENTILATION_TAG = ResourceLocation.fromNamespaceAndPath(CreateShared.MODID, "ventilation");
+
     @Override
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         ResourceLocation ventId = ModBlocks.FACTORY_VENT.getId();
         ResourceLocation ductId = ModBlocks.FACTORY_VENT_DUCT.getId();
 
         helper.forComponents(ventId)
-                .addStoryBoard("vent/gate", VentScenes::ventGate)
-                .addStoryBoard("vent/network", VentScenes::ventDuctNetwork);
+                .addStoryBoard("vent/gate", VentScenes::ventGate, VENTILATION_TAG)
+                .addStoryBoard("vent/network", VentScenes::ventDuctNetwork, VENTILATION_TAG);
 
         helper.forComponents(ductId)
-                .addStoryBoard("vent/network", VentScenes::ventDuctNetwork)
-                .addStoryBoard("vent/gate", VentScenes::ventGate);
+                .addStoryBoard("vent/network", VentScenes::ventDuctNetwork, VENTILATION_TAG)
+                .addStoryBoard("vent/gate", VentScenes::ventGate, VENTILATION_TAG);
     }
 
     @Override
     public void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
-        // Can tag components if desired
+        helper.registerTag(VENTILATION_TAG)
+                .addToIndex()
+                .item(ModBlocks.FACTORY_VENT.get(), true, false)
+                .title("Factory Ventilation")
+                .description("Hollow exhaust vents and multi-directional ductwork for crawl tunnels and air circulation")
+                .register();
+
+        helper.addToTag(VENTILATION_TAG)
+                .add(ModBlocks.FACTORY_VENT.getId())
+                .add(ModBlocks.FACTORY_VENT_DUCT.getId())
+                .add(com.simibubi.create.AllBlocks.ENCASED_FAN.getId());
     }
 }
