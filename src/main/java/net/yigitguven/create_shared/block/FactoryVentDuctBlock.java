@@ -25,7 +25,17 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class FactoryVentDuctBlock extends Block implements IWrenchable {
+import javax.annotation.Nullable;
+
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.yigitguven.create_shared.block.entity.AbstractVentBlockEntity;
+import net.yigitguven.create_shared.block.entity.FactoryVentDuctBlockEntity;
+import net.yigitguven.create_shared.registry.ModBlockEntities;
+
+public class FactoryVentDuctBlock extends Block implements IWrenchable, EntityBlock {
     public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
     public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
     public static final BooleanProperty EAST = BlockStateProperties.EAST;
@@ -109,6 +119,7 @@ public class FactoryVentDuctBlock extends Block implements IWrenchable {
         if (newState != state) {
             level.setBlock(pos, newState, Block.UPDATE_ALL);
         }
+        notifyNetwork(level, pos);
     }
 
     @Override
@@ -171,5 +182,40 @@ public class FactoryVentDuctBlock extends Block implements IWrenchable {
                 .setValue(WEST, state.getValue(EAST));
             default -> super.mirror(state, mirror);
         };
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new FactoryVentDuctBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        if (level.isClientSide()) return null;
+        return type == ModBlockEntities.FACTORY_VENT_DUCT.get()
+            ? (lvl, p, st, be) -> FactoryVentDuctBlockEntity.tick(lvl, p, st, (FactoryVentDuctBlockEntity) be)
+            : null;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            for (Direction dir : Direction.values()) {
+                BlockEntity be = level.getBlockEntity(pos.relative(dir));
+                if (be instanceof AbstractVentBlockEntity avbe) {
+                    avbe.markNetworkDirty();
+                }
+            }
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+
+    private void notifyNetwork(Level level, BlockPos pos) {
+        if (level.isClientSide()) return;
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof AbstractVentBlockEntity avbe) {
+            avbe.markNetworkDirty();
+        }
     }
 }

@@ -1,11 +1,6 @@
 {
   "multipart": [
     {
-      "apply": {
-        "model": "create_shared:block/factory_vent_duct_frame"
-      }
-    },
-    {
       "when": {
         "north": "false"
       },
@@ -56,6 +51,345 @@
       "apply": {
         "model": "create_shared:block/factory_vent_duct_wall",
         "x": 270
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false"
+          },
+          {
+            "north": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_edge_bottom"
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false"
+          },
+          {
+            "east": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_edge_bottom",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false"
+          },
+          {
+            "south": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_edge_bottom",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false"
+          },
+          {
+            "west": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_edge_bottom",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "up": "false"
+          },
+          {
+            "north": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_edge_top"
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "up": "false"
+          },
+          {
+            "east": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_edge_top",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "up": "false"
+          },
+          {
+            "south": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_edge_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "up": "false"
+          },
+          {
+            "west": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_edge_top",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "north": "false"
+          },
+          {
+            "west": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_pillar_mid"
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "north": "false"
+          },
+          {
+            "east": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_pillar_mid",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "south": "false"
+          },
+          {
+            "east": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_pillar_mid",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "south": "false"
+          },
+          {
+            "west": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_pillar_mid",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false"
+          },
+          {
+            "north": "false"
+          },
+          {
+            "west": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_corner_bottom"
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false"
+          },
+          {
+            "north": "false"
+          },
+          {
+            "east": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_corner_bottom",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false"
+          },
+          {
+            "south": "false"
+          },
+          {
+            "east": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_corner_bottom",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false"
+          },
+          {
+            "south": "false"
+          },
+          {
+            "west": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_corner_bottom",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "up": "false"
+          },
+          {
+            "north": "false"
+          },
+          {
+            "west": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_corner_top"
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "up": "false"
+          },
+          {
+            "north": "false"
+          },
+          {
+            "east": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_corner_top",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "up": "false"
+          },
+          {
+            "south": "false"
+          },
+          {
+            "east": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_corner_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "up": "false"
+          },
+          {
+            "south": "false"
+          },
+          {
+            "west": "false"
+          }
+        ]
+      },
+      "apply": {
+        "model": "create_shared:block/factory_vent_duct_corner_top",
+        "y": 270
       }
     }
   ]

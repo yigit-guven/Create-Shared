@@ -28,7 +28,17 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class FactoryVentBlock extends Block implements IWrenchable {
+import javax.annotation.Nullable;
+
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.yigitguven.create_shared.block.entity.AbstractVentBlockEntity;
+import net.yigitguven.create_shared.block.entity.FactoryVentBlockEntity;
+import net.yigitguven.create_shared.registry.ModBlockEntities;
+
+public class FactoryVentBlock extends Block implements IWrenchable, EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
@@ -98,6 +108,11 @@ public class FactoryVentBlock extends Block implements IWrenchable {
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean isMoving) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof FactoryVentBlockEntity fvbe) {
+            fvbe.blockInFrontChanged();
+        }
+
         if (level.isClientSide()) return;
 
         boolean connected = isConnectedAtBack(level, pos, state.getValue(FACING));
@@ -116,6 +131,7 @@ public class FactoryVentBlock extends Block implements IWrenchable {
                     shouldBeOpen ? SoundEvents.IRON_TRAPDOOR_OPEN : SoundEvents.IRON_TRAPDOOR_CLOSE,
                     SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
             }
+            notifyNetwork(level, pos);
         }
     }
 
@@ -128,6 +144,11 @@ public class FactoryVentBlock extends Block implements IWrenchable {
             level.playSound(null, pos,
                 isOpen ? SoundEvents.IRON_TRAPDOOR_OPEN : SoundEvents.IRON_TRAPDOOR_CLOSE,
                 SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof FactoryVentBlockEntity fvbe) {
+                fvbe.blockInFrontChanged();
+            }
+            notifyNetwork(level, pos);
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
         return InteractionResult.PASS;
@@ -183,6 +204,45 @@ public class FactoryVentBlock extends Block implements IWrenchable {
         boolean connected = isConnectedAtBack(level, pos, next);
         level.setBlock(pos, state.setValue(FACING, next).setValue(CONNECTED, connected), Block.UPDATE_ALL);
         IWrenchable.playRotateSound(level, pos);
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof FactoryVentBlockEntity fvbe) {
+            fvbe.blockInFrontChanged();
+        }
+        notifyNetwork(level, pos);
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new FactoryVentBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return type == ModBlockEntities.FACTORY_VENT.get()
+            ? (lvl, p, st, be) -> FactoryVentBlockEntity.tick(lvl, p, st, (FactoryVentBlockEntity) be)
+            : null;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            for (Direction dir : Direction.values()) {
+                BlockEntity be = level.getBlockEntity(pos.relative(dir));
+                if (be instanceof AbstractVentBlockEntity avbe) {
+                    avbe.markNetworkDirty();
+                }
+            }
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+
+    private void notifyNetwork(Level level, BlockPos pos) {
+        if (level.isClientSide()) return;
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof AbstractVentBlockEntity avbe) {
+            avbe.markNetworkDirty();
+        }
     }
 }

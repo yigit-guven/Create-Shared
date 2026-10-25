@@ -22,14 +22,20 @@ public class CreateSharedPonderPlugin implements PonderPlugin {
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         ResourceLocation ventId = ModBlocks.FACTORY_VENT.getId();
         ResourceLocation ductId = ModBlocks.FACTORY_VENT_DUCT.getId();
+        ResourceLocation fanId = com.simibubi.create.AllBlocks.ENCASED_FAN.getId();
 
         helper.forComponents(ventId)
                 .addStoryBoard("vent/gate", VentScenes::ventGate, VENTILATION_TAG)
+                .addStoryBoard("vent/airflow", VentScenes::ventAirflow, VENTILATION_TAG, com.simibubi.create.infrastructure.ponder.AllCreatePonderTags.KINETIC_APPLIANCES)
                 .addStoryBoard("vent/network", VentScenes::ventDuctNetwork, VENTILATION_TAG);
 
         helper.forComponents(ductId)
                 .addStoryBoard("vent/network", VentScenes::ventDuctNetwork, VENTILATION_TAG)
+                .addStoryBoard("vent/airflow", VentScenes::ventAirflow, VENTILATION_TAG, com.simibubi.create.infrastructure.ponder.AllCreatePonderTags.KINETIC_APPLIANCES)
                 .addStoryBoard("vent/gate", VentScenes::ventGate, VENTILATION_TAG);
+
+        helper.forComponents(fanId)
+                .addStoryBoard("vent/airflow", VentScenes::ventAirflow, VENTILATION_TAG, com.simibubi.create.infrastructure.ponder.AllCreatePonderTags.KINETIC_APPLIANCES);
     }
 
     @Override

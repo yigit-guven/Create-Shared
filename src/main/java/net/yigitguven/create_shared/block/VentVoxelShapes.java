@@ -56,6 +56,22 @@ public final class VentVoxelShapes {
         PANELS.put(Direction.WEST, Block.box(0, 2, 2, 2, 14, 14));
         PANELS.put(Direction.EAST, Block.box(14, 2, 2, 16, 14, 14));
 
+        // Mid-height pillars (Y: 2..14)
+        VoxelShape mNW = Block.box(0, 2, 0, 2, 14, 2);
+        VoxelShape mNE = Block.box(14, 2, 0, 16, 14, 2);
+        VoxelShape mSW = Block.box(0, 2, 14, 2, 14, 16);
+        VoxelShape mSE = Block.box(14, 2, 14, 16, 14, 16);
+
+        // 8 Corner cubes (2x2x2)
+        VoxelShape cDNW = Block.box(0, 0, 0, 2, 2, 2);
+        VoxelShape cDNE = Block.box(14, 0, 0, 16, 2, 2);
+        VoxelShape cDSW = Block.box(0, 0, 14, 2, 2, 16);
+        VoxelShape cDSE = Block.box(14, 0, 14, 16, 2, 16);
+        VoxelShape cUNW = Block.box(0, 14, 0, 2, 16, 2);
+        VoxelShape cUNE = Block.box(14, 14, 0, 16, 16, 2);
+        VoxelShape cUSW = Block.box(0, 14, 14, 2, 16, 16);
+        VoxelShape cUSE = Block.box(14, 14, 14, 16, 16, 16);
+
         // Precompute DUCT_SHAPES
         for (int i = 0; i < 64; i++) {
             boolean down = (i & 1) != 0;
@@ -65,13 +81,41 @@ public final class VentVoxelShapes {
             boolean west = (i & 16) != 0;
             boolean east = (i & 32) != 0;
 
-            VoxelShape shape = FRAME;
+            VoxelShape shape = Shapes.empty();
             if (!down) shape = Shapes.or(shape, PANELS.get(Direction.DOWN));
             if (!up) shape = Shapes.or(shape, PANELS.get(Direction.UP));
             if (!north) shape = Shapes.or(shape, PANELS.get(Direction.NORTH));
             if (!south) shape = Shapes.or(shape, PANELS.get(Direction.SOUTH));
             if (!west) shape = Shapes.or(shape, PANELS.get(Direction.WEST));
             if (!east) shape = Shapes.or(shape, PANELS.get(Direction.EAST));
+
+            // 4 X-bars
+            if (!down || !north) shape = Shapes.or(shape, bN);
+            if (!down || !south) shape = Shapes.or(shape, bS);
+            if (!up || !north) shape = Shapes.or(shape, tN);
+            if (!up || !south) shape = Shapes.or(shape, tS);
+
+            // 4 Z-bars
+            if (!down || !west) shape = Shapes.or(shape, bW);
+            if (!down || !east) shape = Shapes.or(shape, bE);
+            if (!up || !west) shape = Shapes.or(shape, tW);
+            if (!up || !east) shape = Shapes.or(shape, tE);
+
+            // 4 Mid pillars
+            if (!north || !west) shape = Shapes.or(shape, mNW);
+            if (!north || !east) shape = Shapes.or(shape, mNE);
+            if (!south || !west) shape = Shapes.or(shape, mSW);
+            if (!south || !east) shape = Shapes.or(shape, mSE);
+
+            // 8 Corner cubes
+            if (!down || !north || !west) shape = Shapes.or(shape, cDNW);
+            if (!down || !north || !east) shape = Shapes.or(shape, cDNE);
+            if (!down || !south || !west) shape = Shapes.or(shape, cDSW);
+            if (!down || !south || !east) shape = Shapes.or(shape, cDSE);
+            if (!up || !north || !west) shape = Shapes.or(shape, cUNW);
+            if (!up || !north || !east) shape = Shapes.or(shape, cUNE);
+            if (!up || !south || !west) shape = Shapes.or(shape, cUSW);
+            if (!up || !south || !east) shape = Shapes.or(shape, cUSE);
 
             DUCT_SHAPES[i] = shape.optimize();
         }
