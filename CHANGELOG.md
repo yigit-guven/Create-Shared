@@ -30,7 +30,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Emergency Hazard Blocks** (Red & White danger stripes): Emergency Hazard Block (3-axis rotatable pillar), Emergency Hazard Stairs, Emergency Hazard Slab, Emergency Hazard Wall.
   - **Diamond Plate**: Industrial embossed steel tread plate, Diamond Plate Stairs, Diamond Plate Slab, Diamond Plate Wall.
   - **Riveted Sheet Metal**: Industrial boiler plating with seams and hex rivets, Riveted Sheet Metal Stairs, Riveted Sheet Metal Slab, Riveted Sheet Metal Wall.
-  - **Factory Exhaust Vent**: Directional 6-way ventilation unit with metal louvers, heavy casing, and status LED indicator.
+  - **Factory Exhaust Vent** (`create_shared:factory_vent`): Directional 6-way ventilation unit with a true hollow interior (12×12 pixel crawl space with 2-pixel walls). Features redstone-activated and manual gate opening/closing with industrial metallic sounds, dynamic rear collar connection to ducts and fans, 3D swung-up open hatch, and dual-sided gate textures.
+  - **Factory Vent Duct** (`create_shared:factory_vent_duct`): 6-way omnidirectional hollow crawl duct block (`NORTH`, `SOUTH`, `EAST`, `WEST`, `UP`, `DOWN`) that automatically opens connecting sides towards neighboring ducts, vents, and Create fans while keeping unconnected sides sealed with riveted sheet metal panels. Supports vertical shaft climbing (`isLadder`) using Space/Shift.
+  - **Seamless Vanilla Crawl Integration**: Approaching open wall vents automatically initiates vanilla crawl mode (`Pose.SWIMMING`), allowing players to smoothly enter 0.75m vent tunnels. Crawling persists throughout vent/duct webs and automatically releases when exiting into open spaces.
+  - **Create Encased Fan Integration**: Exhaust vents and vent ducts connect directly to the fanning side of Create Encased Fans, allowing raycast air currents to blast through open vents and ducts into connected rooms.
   - **Industrial Floor Grate**: Catwalk floor mesh featuring transparent cutout slots and waterloggable support (`SimpleWaterloggedBlock`).
 - Integrated Create Mod wrench mechanics (`IWrenchable` & `#create:wrench_pickup`):
   - **Shift + Right-Click** with wrench instantly dismantles blocks back into player inventory with wrench remove sounds and particles.
