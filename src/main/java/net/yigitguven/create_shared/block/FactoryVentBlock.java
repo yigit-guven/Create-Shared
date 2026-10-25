@@ -63,6 +63,11 @@ public class FactoryVentBlock extends Block implements IWrenchable {
             return otherFacing == back || (otherFacing == facing && backState.getValue(OPEN));
         }
 
+        // Connect to Create Encased Fan if the fan's fanning side points towards this vent
+        if (backState.getBlock() instanceof com.simibubi.create.content.kinetics.fan.EncasedFanBlock) {
+            return backState.getValue(com.simibubi.create.content.kinetics.fan.EncasedFanBlock.FACING) == facing;
+        }
+
         return false;
     }
 
@@ -95,14 +100,18 @@ public class FactoryVentBlock extends Block implements IWrenchable {
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean isMoving) {
         if (level.isClientSide()) return;
 
+        boolean connected = isConnectedAtBack(level, pos, state.getValue(FACING));
         boolean hasSignal = level.hasNeighborSignal(pos);
-        if (state.getValue(POWERED) != hasSignal) {
+        boolean signalChanged = state.getValue(POWERED) != hasSignal;
+        boolean connectedChanged = state.getValue(CONNECTED) != connected;
+
+        if (signalChanged || connectedChanged) {
             boolean wasOpen = state.getValue(OPEN);
-            boolean shouldBeOpen = hasSignal;
-            BlockState newState = state.setValue(POWERED, hasSignal).setValue(OPEN, shouldBeOpen);
+            boolean shouldBeOpen = signalChanged ? hasSignal : wasOpen;
+            BlockState newState = state.setValue(POWERED, hasSignal).setValue(OPEN, shouldBeOpen).setValue(CONNECTED, connected);
             level.setBlock(pos, newState, Block.UPDATE_ALL);
 
-            if (wasOpen != shouldBeOpen) {
+            if (signalChanged && wasOpen != shouldBeOpen) {
                 level.playSound(null, pos,
                     shouldBeOpen ? SoundEvents.IRON_TRAPDOOR_OPEN : SoundEvents.IRON_TRAPDOOR_CLOSE,
                     SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);

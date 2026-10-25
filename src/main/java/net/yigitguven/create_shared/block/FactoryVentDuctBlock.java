@@ -73,6 +73,11 @@ public class FactoryVentDuctBlock extends Block implements IWrenchable {
             }
         }
 
+        // Connect to Create Encased Fan if the fan's fanning side points towards this duct
+        if (neighborState.getBlock() instanceof com.simibubi.create.content.kinetics.fan.EncasedFanBlock) {
+            return neighborState.getValue(com.simibubi.create.content.kinetics.fan.EncasedFanBlock.FACING) == direction.getOpposite();
+        }
+
         return false;
     }
 
@@ -90,6 +95,20 @@ public class FactoryVentDuctBlock extends Block implements IWrenchable {
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         return state.setValue(PROPERTY_BY_DIRECTION.get(direction), canConnectTo(level, pos, direction));
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean isMoving) {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, isMoving);
+        if (level.isClientSide()) return;
+
+        BlockState newState = state;
+        for (Direction dir : Direction.values()) {
+            newState = newState.setValue(PROPERTY_BY_DIRECTION.get(dir), canConnectTo(level, pos, dir));
+        }
+        if (newState != state) {
+            level.setBlock(pos, newState, Block.UPDATE_ALL);
+        }
     }
 
     @Override

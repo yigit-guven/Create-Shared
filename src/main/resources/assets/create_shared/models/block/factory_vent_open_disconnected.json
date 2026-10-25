@@ -860,7 +860,7 @@
             14,
             14
           ],
-          "texture": "#metal"
+          "texture": "#front"
         },
         "north": {
           "uv": [
