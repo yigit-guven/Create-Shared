@@ -49,5 +49,20 @@
   "create_shared.ponder.factory_vent_airflow.text_7": "Large duct systems experience friction loss; add enough fan power to prevent dissipation",
   "create_shared.ponder.tag.ventilation": "Ventilation",
   "create_shared.ponder.tag.ventilation.description": "Hollow exhaust vents and multi-directional ductwork for crawl tunnels and air circulation",
-  "create_shared.gui.goggles.ventilation_network": "Ventilation Network"
+  "create_shared.gui.goggles.ventilation_network": "Ventilation Network",
+  "create_shared.config.ventilation": "Ventilation",
+  "create_shared.config.distributionMode": "Airflow Distribution Mode",
+  "create_shared.config.distributionMode.tooltip": "How airflow is distributed among open exhaust vents (DISTANCE_ATTENUATED or EQUAL).",
+  "create_shared.config.distanceDecayRatio": "Distance Decay Ratio",
+  "create_shared.config.distanceDecayRatio.tooltip": "Decay ratio per duct distance in DISTANCE_ATTENUATED mode (higher = faster dropoff with distance).",
+  "create_shared.config.frictionLossPerDuct": "Friction Loss Per Duct",
+  "create_shared.config.frictionLossPerDuct.tooltip": "Airflow (RPM) lost per duct in the network due to internal friction.",
+  "create_shared.config.minAirflowPerVent": "Minimum Airflow Per Vent",
+  "create_shared.config.minAirflowPerVent.tooltip": "Minimum airflow (RPM) required at an open vent to produce wind or suction.",
+  "create_shared.config.maxWindRange": "Maximum Wind Range",
+  "create_shared.config.maxWindRange.tooltip": "Maximum range in blocks that wind/suction can reach from an open vent.",
+  "create_shared.config.windStrength": "Wind Strength Multiplier",
+  "create_shared.config.windStrength.tooltip": "Multiplier for physical push/pull force applied to entities by vents.",
+  "create_shared.config.maxNetworkBlocks": "Max Network Blocks",
+  "create_shared.config.maxNetworkBlocks.tooltip": "Maximum number of connected ducts/vents scanned in a single ventilation network."
 }

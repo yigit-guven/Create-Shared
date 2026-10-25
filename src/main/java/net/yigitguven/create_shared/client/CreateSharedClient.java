@@ -46,7 +46,12 @@ public class CreateSharedClient {
     public static final net.minecraft.client.model.geom.ModelLayerLocation HARD_HAT_LAYER =
         new net.minecraft.client.model.geom.ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(CreateShared.MODID, "hard_hat"), "main");
 
-    public static void init(IEventBus modEventBus) {
+    public static void init(IEventBus modEventBus, net.neoforged.fml.ModContainer modContainer) {
+        modContainer.registerExtensionPoint(
+            net.neoforged.neoforge.client.gui.IConfigScreenFactory.class,
+            net.neoforged.neoforge.client.gui.ConfigurationScreen::new
+        );
+
         modEventBus.addListener(CreateSharedClient::onClientSetup);
         modEventBus.addListener(CreateSharedClient::onRegisterLayerDefinitions);
         modEventBus.addListener(CreateSharedClient::onRegisterAdditionalModels);

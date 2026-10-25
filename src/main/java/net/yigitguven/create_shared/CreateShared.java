@@ -42,7 +42,7 @@ public class CreateShared {
         modEventBus.addListener(ModCreativeTabs::addCreative);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            CreateSharedClient.init(modEventBus);
+            CreateSharedClient.init(modEventBus, modContainer);
         }
 
         net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(net.yigitguven.create_shared.event.VentCrawlHandler::onPlayerTick);
