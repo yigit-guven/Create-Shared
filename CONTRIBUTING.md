@@ -15,7 +15,7 @@ To set up the workspace for development:
 
 2. **Clone the Repository**:
    ```bash
-   git clone https://github.com/YigitGuven/Create-Shared.git
+   git clone https://github.com/yigit-guven/Create-Shared.git
    cd Create-Shared
    ```
 
@@ -34,7 +34,7 @@ To set up the workspace for development:
 
 ## 🐛 Reporting Bugs
 
-- Search existing [Issues](https://github.com/YigitGuven/Create-Shared/issues) to ensure your issue hasn't already been reported.
+- Search existing [Issues](https://github.com/yigit-guven/Create-Shared/issues) to ensure your issue hasn't already been reported.
 - If not, open a new issue using the **Bug Report** or **Crash Report** template.
 - Provide all requested information: Minecraft version, Mod Loader version, Create version, steps to reproduce, and logs/crash reports via [mclo.gs](https://mclo.gs/).
 

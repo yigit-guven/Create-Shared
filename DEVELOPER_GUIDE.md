@@ -24,7 +24,7 @@ repositories {
     // Option 1: GitHub Packages (Official Release Packages)
     maven {
         name = "CreateSharedGitHubPackages"
-        url = uri("https://maven.pkg.github.com/YigitGuven/Create-Shared")
+        url = uri("https://maven.pkg.github.com/yigit-guven/Create-Shared")
         credentials {
             username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
             password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
@@ -43,10 +43,10 @@ repositories {
 
 dependencies {
     // From GitHub Packages or Local Maven (version matches the GitHub Release tag, e.g. 1.0.0):
-    implementation("net.yigitguven.create_shared:create_shared:${create_shared_version}")
+    implementation("net.yigitguven:create_shared:${create_shared_version}")
 
     // Or from JitPack using the GitHub Release tag:
-    // implementation("com.github.YigitGuven:Create-Shared:${create_shared_version}")
+    // implementation("com.github.yigit-guven:Create-Shared:${create_shared_version}")
 }
 ```
 

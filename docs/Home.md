@@ -19,5 +19,5 @@ Explore the sections below to learn more about the mod:
 ## 💡 Contributing & Feedback
 
 Have questions, suggestions, or encountered a bug?
-- Check our [Issue Tracker](https://github.com/YigitGuven/Create-Shared/issues)
-- Review our [Contribution Guidelines](https://github.com/YigitGuven/Create-Shared/blob/main/CONTRIBUTING.md)
+- Check our [Issue Tracker](https://github.com/yigit-guven/Create-Shared/issues)
+- Review our [Contribution Guidelines](https://github.com/yigit-guven/Create-Shared/blob/1.21.1-neoforge/CONTRIBUTING.md)

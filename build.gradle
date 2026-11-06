@@ -141,6 +141,7 @@ tasks.withType(ProcessResources).configureEach {
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
+            groupId = 'net.yigitguven'
             artifactId = mod_id
             version = project.version.toString()
             from components.java
@@ -153,7 +154,7 @@ publishing {
         }
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/${System.getenv('GITHUB_REPOSITORY') ?: 'YigitGuven/Create-Shared'}")
+            url = uri("https://maven.pkg.github.com/${System.getenv('GITHUB_REPOSITORY') ?: 'yigit-guven/Create-Shared'}")
             credentials {
                 username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") ?: ""
                 password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") ?: ""

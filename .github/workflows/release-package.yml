@@ -2,7 +2,10 @@ name: Publish Release Package
 
 on:
   release:
-    types: [published]
+    types: [published, created, edited, released, prereleased]
+  push:
+    tags:
+      - '*'
   workflow_dispatch:
     inputs:
       tag:
@@ -12,6 +15,10 @@ on:
 permissions:
   contents: write
   packages: write
+
+concurrency:
+  group: release-package-${{ github.event.release.tag_name || inputs.tag || github.ref_name }}
+  cancel-in-progress: false
 
 jobs:
   publish-package:
@@ -24,8 +31,10 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             RAW_TAG="${{ inputs.tag }}"
-          else
+          elif [ "${{ github.event_name }}" = "release" ]; then
             RAW_TAG="${{ github.event.release.tag_name }}"
+          else
+            RAW_TAG="${GITHUB_REF_NAME}"
           fi
           # Strip optional leading 'v' (e.g. v1.0.0 -> 1.0.0) for Maven package version
           PACKAGE_VERSION="${RAW_TAG#v}"
@@ -75,14 +84,16 @@ jobs:
                               if (pkgVersion != null && !pkgVersion.isEmpty()) {
                                   mavenPub.version = pkgVersion
                               }
-                              if (proj.findProperty("mod_id") != null) {
-                                  mavenPub.artifactId = proj.findProperty("mod_id").toString()
+                              def modId = proj.findProperty("mod_id")?.toString() ?: proj.name
+                              mavenPub.artifactId = modId
+                              if (mavenPub.groupId != null && mavenPub.groupId.endsWith("." + modId)) {
+                                  mavenPub.groupId = mavenPub.groupId.substring(0, mavenPub.groupId.length() - modId.length() - 1)
                               }
                           }
                           if (pub.repositories.findByName("GitHubPackages") == null) {
                               pub.repositories.maven { repo ->
                                   repo.name = "GitHubPackages"
-                                  repo.url = proj.uri("https://maven.pkg.github.com/${System.getenv('GITHUB_REPOSITORY') ?: 'YigitGuven/Create-Shared'}")
+                                  repo.url = proj.uri("https://maven.pkg.github.com/${System.getenv('GITHUB_REPOSITORY') ?: 'yigit-guven/Create-Shared'}")
                                   repo.credentials { creds ->
                                       creds.username = System.getenv("GITHUB_ACTOR") ?: ""
                                       creds.password = System.getenv("GITHUB_TOKEN") ?: ""
@@ -101,19 +112,49 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_VERSION: ${{ steps.version.outputs.package_version }}
         run: |
-          ./gradlew build publishAllPublicationsToGitHubPackagesRepository \
+          ./gradlew build \
             -Pmod_version="${RELEASE_VERSION}" \
             -Prelease_version="${RELEASE_VERSION}" \
             --init-script "$RUNNER_TEMP/github-packages.init.gradle"
 
-      - name: Upload Built Artifacts to GitHub Release
-        if: github.event_name == 'release'
+          set +e
+          PUBLISH_OUTPUT=$(./gradlew publishAllPublicationsToGitHubPackagesRepository \
+            -Pmod_version="${RELEASE_VERSION}" \
+            -Prelease_version="${RELEASE_VERSION}" \
+            --init-script "$RUNNER_TEMP/github-packages.init.gradle" 2>&1)
+          PUBLISH_EXIT=$?
+          set -e
+          echo "$PUBLISH_OUTPUT"
+          if [ $PUBLISH_EXIT -ne 0 ]; then
+            if echo "$PUBLISH_OUTPUT" | grep -qiE "409|Conflict|already exists"; then
+              echo "Package version ${RELEASE_VERSION} is already published to GitHub Packages; continuing."
+            else
+              exit $PUBLISH_EXIT
+            fi
+          fi
+
+      - name: Ensure GitHub Release & Upload Built Artifacts
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RAW_TAG: ${{ steps.version.outputs.raw_tag }}
+          PACKAGE_VERSION: ${{ steps.version.outputs.package_version }}
         run: |
           shopt -s nullglob
           JARS=(build/libs/*.jar)
-          if [ ${#JARS[@]} -gt 0 ]; then
-            gh release upload "${{ steps.version.outputs.raw_tag }}" "${JARS[@]}" --clobber
+
+          if ! gh release view "$RAW_TAG" >/dev/null 2>&1; then
+            echo "No published GitHub Release found for tag $RAW_TAG. Creating release..."
+            if [ ${#JARS[@]} -gt 0 ]; then
+              gh release create "$RAW_TAG" "${JARS[@]}" \
+                --title "Create: Shared v${PACKAGE_VERSION}" \
+                --generate-notes
+            else
+              gh release create "$RAW_TAG" \
+                --title "Create: Shared v${PACKAGE_VERSION}" \
+                --generate-notes
+            fi
+          elif [ ${#JARS[@]} -gt 0 ]; then
+            echo "Uploading built JARs to existing GitHub Release $RAW_TAG..."
+            gh release upload "$RAW_TAG" "${JARS[@]}" --clobber
           fi
 

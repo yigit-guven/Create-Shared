@@ -32,7 +32,7 @@
 
 1. Install the supported **Mod Loader** for your target **Minecraft** version.
 2. Download the matching version of **[Create](https://curseforge.com/minecraft/mc-mods/create)**.
-3. Download the matching build of **Create Shared** from [Releases](https://github.com/YigitGuven/Create-Shared/releases).
+3. Download the matching build of **Create Shared** from [Releases](https://github.com/yigit-guven/Create-Shared/releases).
 4. *(Optional)* Download **[JEI](https://curseforge.com/minecraft/mc-mods/jei)** for your Minecraft version.
 5. Place all downloaded `.jar` files in your `.minecraft/mods` directory and launch the game!
 
@@ -41,7 +41,7 @@
 ## 📖 Documentation & Wiki
 
 All guides, mechanical explanations, and developer references are synchronized with our GitHub Wiki:
-- 📚 **[GitHub Wiki](https://github.com/YigitGuven/Create-Shared/wiki)**
+- 📚 **[GitHub Wiki](https://github.com/yigit-guven/Create-Shared/wiki)**
 - 🧩 **[Developer & Library Guide](DEVELOPER_GUIDE.md)** *(Using Create: Shared as a dependency, shared config system, & APIs)*
 - 🚀 **[Getting Started Guide](docs/Getting-Started.md)**
 - ⚙️ **[Features & Mechanics](docs/Features.md)**
@@ -56,7 +56,7 @@ All guides, mechanical explanations, and developer references are synchronized w
 To clone and compile the project locally:
 
 ```bash
-git clone https://github.com/YigitGuven/Create-Shared.git
+git clone https://github.com/yigit-guven/Create-Shared.git
 cd Create-Shared
 ./gradlew build
 ```
@@ -72,7 +72,7 @@ To run the development client in your IDE:
 
 Contributions, bug reports, and suggestions are welcome!
 - Review our [Contribution Guidelines](CONTRIBUTING.md).
-- Report bugs or crashes via [GitHub Issues](https://github.com/YigitGuven/Create-Shared/issues).
+- Report bugs or crashes via [GitHub Issues](https://github.com/yigit-guven/Create-Shared/issues).
 - Please adhere to our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ---
