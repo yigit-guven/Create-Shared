@@ -6,6 +6,7 @@ on:
       - 'update.json'
       - 'CHANGELOG.md'
       - 'README.md'
+      - 'DEVELOPER_GUIDE.md'
       - 'SECURITY.md'
       - 'LICENSE'
       - 'CONTRIBUTING.md'
@@ -63,6 +64,7 @@ jobs:
             "update.json"
             "CHANGELOG.md"
             "README.md"
+            "DEVELOPER_GUIDE.md"
             "SECURITY.md"
             "LICENSE"
             "LICENSE.md"

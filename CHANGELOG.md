@@ -10,10 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-10-18
 
 ### Added
-- Initial project release for Minecraft **1.21.1** on **NeoForge** (`21.1.262+`).
-- Integrated **Create Mod** (`6.0.0+`) as mandatory dependency.
-- Integrated **Just Enough Items (JEI)** (`19.0.0+`) for recipe viewing and runtime compatibility.
-- Integrated **Curios API** (`9.5.1+1.21.1`) into Gradle for compilation and local development runtime (`localRuntime`).
+- Initial project release across supported Minecraft versions and mod loaders.
+- Integrated **Create Mod** as mandatory dependency.
+- Integrated **Just Enough Items (JEI)** for recipe viewing and runtime compatibility.
+- Integrated **Curios API / Accessories** into Gradle for compilation and local development runtime (`localRuntime`).
 - Added dynamic RGB dyeing support for Create's existing **Wrench** (`create:wrench`) and **Engineer's Goggles** (`create:goggles`):
   - Items can be dyed in crafting tables with any vanilla dye or dye combinations via `#minecraft:dyeable` and `DataComponents.DYED_COLOR`.
   - Right-clicking water cauldrons washes off applied dye and restores the default look.
@@ -59,6 +59,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Special Trimming for Tools & Goggles**:
     - Smithing Create's **Engineer's Goggles** (`create:goggles`) with the template changes the metal frame and casing color to the applied ingot/material (Copper, Iron, Gold, Netherite, Diamond, Emerald, Amethyst, Redstone, Lapis, Quartz) while preserving crystal cyan glass and independently dyed leather straps.
     - Smithing Create's **Wrench** (`create:wrench`) with the template changes the metal head, prongs, axle, and gear casing to the applied ingot/material while preserving the independently dyed handle.
+- Added **Shared Ecosystem Configuration System** (`CreateSharedConfigs` & `CreateSharedConfigScreen`):
+  - Automatically discovers all mods in the modpack that declare `create_shared` as a dependency in their mod metadata file (plus an optional API via `CreateSharedConfigs.registerMod` / `CreateSharedConfigs.registerConfig`).
+  - Presents a unified configuration screen grouped by config type (`Client`, `Server`, `Common`, `Startup`), listing **Create: Shared** at the top followed by all dependent mods sorted alphabetically (`A–Z`) with their titles and config sections/entries inline.
+  - Automatically creates a **Client Configuration** menu when any dependent mod in the modpack provides client-sided configs.
+  - Registers and overrides the in-game config screen factory across Create: Shared and all dependent mods so clicking **Config** on any of them opens the shared configuration screen.
 - Added comprehensive documentation and automated GitHub Wiki sync.
 - Added cross-branch documentation synchronization workflow.
 - Added GitHub issue templates for bug reports, crash reports, and feature requests.

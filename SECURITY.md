@@ -2,12 +2,7 @@
 
 ## Supported Versions
 
-Security updates are actively provided for the following versions:
-
-| Version | Supported | Notes |
-| ------- | --------- | ----- |
-| 1.21.1 (NeoForge) | :white_check_mark: | Active Development |
-| < 1.21.1 | :x: | Unsupported |
+Security updates are actively provided for all actively maintained branches of **Create Shared**.
 
 ---
 
@@ -20,6 +15,7 @@ Instead, report it responsibly via:
 2. If private reporting is unavailable, reach out directly to the repository maintainer.
 
 ### What to include:
+- The affected Minecraft version and Mod Loader branch.
 - A description of the vulnerability and its potential impact.
 - Steps or a minimal test scenario to reproduce the issue.
 - Any suggested fixes or mitigations.

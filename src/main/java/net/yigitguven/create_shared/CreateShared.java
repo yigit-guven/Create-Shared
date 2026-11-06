@@ -17,6 +17,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.yigitguven.create_shared.client.CreateSharedClient;
+import net.yigitguven.create_shared.config.CreateSharedConfigs;
 import net.yigitguven.create_shared.config.CreateSharedServerConfig;
 import net.yigitguven.create_shared.registry.ModArmorMaterials;
 import net.yigitguven.create_shared.registry.ModBlockEntities;
@@ -36,7 +37,7 @@ public class CreateShared {
         ModItems.ITEMS.register(modEventBus);
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
 
-        modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.SERVER, CreateSharedServerConfig.SPEC);
+        CreateSharedConfigs.registerConfig(modContainer, net.neoforged.fml.config.ModConfig.Type.SERVER, CreateSharedServerConfig.SPEC);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ModCreativeTabs::addCreative);
