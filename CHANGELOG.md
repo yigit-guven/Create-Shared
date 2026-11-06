@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.0.0] - 2026-10-18
+## [1.0.0] - 2026-11-06
 
 ### Added
 - Initial project release across supported Minecraft versions and mod loaders.
