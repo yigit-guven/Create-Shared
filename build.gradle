@@ -9,7 +9,7 @@ tasks.named('wrapper', Wrapper).configure {
     distributionType = Wrapper.DistributionType.BIN
 }
 
-version = mod_version
+version = project.findProperty('release_version') ?: System.getenv('RELEASE_VERSION') ?: mod_version
 group = mod_group_id
 
 sourceSets.main.resources {
@@ -42,7 +42,10 @@ base {
     archivesName = mod_id
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
 
 neoForge {
     version = project.neo_version
@@ -111,6 +114,7 @@ dependencies {
 }
 
 tasks.withType(ProcessResources).configureEach {
+    var resolvedModVersion = project.version.toString()
     var replaceProperties = [
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
@@ -119,7 +123,7 @@ tasks.withType(ProcessResources).configureEach {
             mod_id                 : mod_id,
             mod_name               : mod_name,
             mod_license            : mod_license,
-            mod_version            : mod_version,
+            mod_version            : resolvedModVersion,
             create_version         : create_version,
             create_version_range   : create_version_range,
             jei_version            : jei_version,
@@ -137,12 +141,23 @@ tasks.withType(ProcessResources).configureEach {
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
+            artifactId = mod_id
+            version = project.version.toString()
             from components.java
         }
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/repo"
+            name = "localRepo"
+            url = layout.projectDirectory.dir("repo").asFile.toURI()
+        }
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/${System.getenv('GITHUB_REPOSITORY') ?: 'YigitGuven/Create-Shared'}")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user") ?: ""
+                password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.key") ?: ""
+            }
         }
     }
 }

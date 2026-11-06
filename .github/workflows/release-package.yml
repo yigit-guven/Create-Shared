@@ -1,0 +1,119 @@
+name: Publish Release Package
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to build and publish (e.g. 1.0.0)'
+        required: true
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  publish-package:
+    name: Build & Publish Package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Determine Release Tag & Version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            RAW_TAG="${{ inputs.tag }}"
+          else
+            RAW_TAG="${{ github.event.release.tag_name }}"
+          fi
+          # Strip optional leading 'v' (e.g. v1.0.0 -> 1.0.0) for Maven package version
+          PACKAGE_VERSION="${RAW_TAG#v}"
+          echo "raw_tag=${RAW_TAG}" >> "$GITHUB_OUTPUT"
+          echo "package_version=${PACKAGE_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "Building and publishing version: ${PACKAGE_VERSION} (from tag: ${RAW_TAG})"
+
+      - name: Checkout repository at Release Tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.version.outputs.raw_tag }}
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Setup Java (JDK 17 & 21 for all MC versions)
+        uses: actions/setup-java@v4
+        with:
+          java-version: |
+            17
+            21
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: Create Universal GitHub Packages Init Script
+        run: |
+          cat << 'EOF' > "$RUNNER_TEMP/github-packages.init.gradle"
+          allprojects {
+              afterEvaluate { proj ->
+                  def pkgVersion = System.getenv("RELEASE_VERSION")
+                  if (pkgVersion != null && !pkgVersion.isEmpty()) {
+                      proj.version = pkgVersion
+                  }
+                  if (proj.plugins.hasPlugin("maven-publish")) {
+                      proj.extensions.configure(org.gradle.api.publish.PublishingExtension) { pub ->
+                          if (pub.publications.isEmpty() && proj.components.findByName("java") != null) {
+                              pub.publications.create("mavenJava", org.gradle.api.publish.maven.MavenPublication) {
+                                  artifactId = proj.findProperty("mod_id") ?: proj.name
+                                  from proj.components.java
+                              }
+                          }
+                          pub.publications.withType(org.gradle.api.publish.maven.MavenPublication).configureEach { mavenPub ->
+                              if (pkgVersion != null && !pkgVersion.isEmpty()) {
+                                  mavenPub.version = pkgVersion
+                              }
+                              if (proj.findProperty("mod_id") != null) {
+                                  mavenPub.artifactId = proj.findProperty("mod_id").toString()
+                              }
+                          }
+                          if (pub.repositories.findByName("GitHubPackages") == null) {
+                              pub.repositories.maven { repo ->
+                                  repo.name = "GitHubPackages"
+                                  repo.url = proj.uri("https://maven.pkg.github.com/${System.getenv('GITHUB_REPOSITORY') ?: 'YigitGuven/Create-Shared'}")
+                                  repo.credentials { creds ->
+                                      creds.username = System.getenv("GITHUB_ACTOR") ?: ""
+                                      creds.password = System.getenv("GITHUB_TOKEN") ?: ""
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+          EOF
+
+      - name: Build and Publish to GitHub Packages
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_VERSION: ${{ steps.version.outputs.package_version }}
+        run: |
+          ./gradlew build publishAllPublicationsToGitHubPackagesRepository \
+            -Pmod_version="${RELEASE_VERSION}" \
+            -Prelease_version="${RELEASE_VERSION}" \
+            --init-script "$RUNNER_TEMP/github-packages.init.gradle"
+
+      - name: Upload Built Artifacts to GitHub Release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          shopt -s nullglob
+          JARS=(build/libs/*.jar)
+          if [ ${#JARS[@]} -gt 0 ]; then
+            gh release upload "${{ steps.version.outputs.raw_tag }}" "${JARS[@]}" --clobber
+          fi
+

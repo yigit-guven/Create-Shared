@@ -17,23 +17,36 @@ create_shared_version_range=[1.0.0,)
 
 ### `build.gradle`
 
-If you are developing locally alongside Create: Shared (published via `./gradlew publish` to the local `repo/` folder or Maven Local) or pulling from Modrinth / CurseMaven:
+Whenever a release is published on GitHub (for example, tag `1.0.0`), **Create: Shared** automatically builds and publishes a Maven package with that exact tag version (`1.0.0`). You can depend on this package directly in your development environment without needing CurseMaven or Modrinth:
 
 ```groovy
 repositories {
+    // Option 1: GitHub Packages (Official Release Packages)
+    maven {
+        name = "CreateSharedGitHubPackages"
+        url = uri("https://maven.pkg.github.com/YigitGuven/Create-Shared")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+        }
+    }
+
+    // Option 2: JitPack (Zero-credential GitHub Release Maven)
+    maven {
+        name = "JitPack"
+        url = uri("https://jitpack.io")
+    }
+
+    // Option 3: Local Maven (if building locally via ./gradlew publishToMavenLocal)
     mavenLocal()
-    maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-    }
-    maven {
-        name = "CurseMaven"
-        url = "https://cursemaven.com"
-    }
 }
 
 dependencies {
+    // From GitHub Packages or Local Maven (version matches the GitHub Release tag, e.g. 1.0.0):
     implementation("net.yigitguven.create_shared:create_shared:${create_shared_version}")
+
+    // Or from JitPack using the GitHub Release tag:
+    // implementation("com.github.YigitGuven:Create-Shared:${create_shared_version}")
 }
 ```
 
